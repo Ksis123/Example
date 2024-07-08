@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import TodoAdd from './components/TodoAdd';
+import TodoList from './components/TodoList';
+import TodoApp from './components/TodoApp';
+import TodoEdit from './components/TodoEdit';
+import TodoCommentAdd from './components/TodoCommentAdd';
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<TodoApp><TodoList/></TodoApp>} />
+        <Route path="/todolist_app" element={<TodoApp><TodoList/></TodoApp>} />
+        <Route path="/todolist_app/add" element={<TodoApp><TodoAdd/></TodoApp>} />
+        <Route path="/todolist_app/edit/:id" element={<TodoApp><TodoEdit/></TodoApp>} />
+        <Route path='/todolist_app/add_comment/:id' element={<TodoApp><TodoCommentAdd/></TodoApp>}/>
+
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 
