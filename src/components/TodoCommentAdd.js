@@ -11,7 +11,7 @@ const TodoCommentAdd= ({ tasks, setTasks }) => {
     const handleAddComment = (e) => {
         e.preventDefault();
         const newComment = {
-            comment: comment,
+            comment_description: comment,
             date_comment: new Date().toLocaleDateString('en-EN', {
                 day: '2-digit',
                 month: '2-digit',
@@ -21,7 +21,7 @@ const TodoCommentAdd= ({ tasks, setTasks }) => {
 
         const updatedTask = {
             ...task,
-            comments: [...(task.comments || []), newComment], // Ensure comments is an array
+            comments: Array.isArray(task.comments) ? [...task.comments, newComment] : [newComment], // ตรวจสอบให้แน่ใจว่า comments เป็นอาร์เรย์
         };
 
         const updatedTasks = tasks.map(t => t.id === parseInt(id) ? updatedTask : t);
@@ -48,10 +48,10 @@ const TodoCommentAdd= ({ tasks, setTasks }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {task.comments && task.comments.map((c, index) => (
+                    {Array.isArray(task.comments) && task.comments.map((c, index) => (
                             <tr key={index}>
                                 <td>{index + 1}</td>
-                                <td>{c.comment}</td>
+                                <td>{c.comment_description}</td>
                                 <td>{c.date_comment}</td>
                             </tr>
                         ))}

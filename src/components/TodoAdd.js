@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const TodoAdd = ({ tasks, setTasks }) => {
   const [title, setTitle] = useState('');
-  const [comments, setComment] = useState([]);
+  const [comment, setComment] = useState('');
   const navigate = useNavigate();
 
  function autoID(){
@@ -18,8 +18,8 @@ const TodoAdd = ({ tasks, setTasks }) => {
     const newTask = {
       id: autoID(),
       title,
-      comments: {
-        comments,
+      comment: {
+        comment_description: comment,
         date_comment: new Date().toLocaleDateString('en-EN', {
           day: '2-digit',
           month: '2-digit',
@@ -54,7 +54,7 @@ const TodoAdd = ({ tasks, setTasks }) => {
         <h2>รายละเอียดหัวข้อ</h2>
         <textarea
           className='w-80 border-2'
-          value={comments}
+          value={comment}
           onChange={e => setComment(e.target.value)}
           placeholder='description'
           required

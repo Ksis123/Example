@@ -7,13 +7,13 @@ const TodoEdit = ({ tasks, setTasks }) => {
 
     const task = tasks.find(t => t.id === parseInt(id));
     const [title, setTitle] = useState(task ? task.title : '');
-    const [comment, setComment] = useState(task ? task.comment.comment : '');
+    const [comment, setComment] = useState(task ? task.comment.comment_description : '');
     const [dateComment, setDateComment] = useState(task ? task.comment.date_comment : '');
 
     useEffect(() => {
         if (task) {
             setTitle(task.title);
-            setComment(task.comment.comment);
+            setComment(task.comment.comment_description);
             setDateComment(task.comment.date_comment);
         }
     }, [task]);
@@ -23,8 +23,8 @@ const TodoEdit = ({ tasks, setTasks }) => {
         const updatedTask = {
             ...task,
             title,
-            comment: {
-                comment,
+            comments: {
+                comment_description : comment,
                 date_comment: dateComment,
             },
         };
